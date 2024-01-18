@@ -34,4 +34,11 @@ public class PizzaEntity {
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Boolean available;
 
+    public Integer getIdPizza() {
+        return idPizza;
+    }
+
+    public void setIdPizza(Integer idPizza) {
+        this.idPizza = idPizza;
+    }
 }
