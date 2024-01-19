@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CutomerEntity {
+public class CustomerEntity {
     @Id
     @Column(name = "id_customer", nullable = false, length = 15)
     private String idCustomer;
