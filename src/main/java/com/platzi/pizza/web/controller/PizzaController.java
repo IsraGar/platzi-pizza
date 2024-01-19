@@ -3,6 +3,7 @@ package com.platzi.pizza.web.controller;
 import com.platzi.pizza.persistence.entity.PizzaEntity;
 import com.platzi.pizza.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,10 @@ public class PizzaController {
         this.pizzaService = pizzaService;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<PizzaEntity>> getAll(){
-        return ResponseEntity.ok(this.pizzaService.getAll());
+    @GetMapping("")
+    public ResponseEntity<Page<PizzaEntity>> getAll(@RequestParam(defaultValue = "0") int pages,
+                                                    @RequestParam(defaultValue = "8") int elements){
+        return ResponseEntity.ok(this.pizzaService.getAll(pages, elements));
     }
 
     @GetMapping("/{id}")
@@ -51,5 +53,31 @@ public class PizzaController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<PizzaEntity>> getAvailable(){
+        return ResponseEntity.ok(this.pizzaService.getAvailable());
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<PizzaEntity> getByName(@PathVariable("name") String name){
+        return ResponseEntity.ok(this.pizzaService.getByName(name));
+    }
+
+    @GetMapping("/with/{desc}")
+    public ResponseEntity<List<PizzaEntity>> getByDescription(@PathVariable("desc") String description){
+        return ResponseEntity.ok(this.pizzaService.getWith(description));
+    }
+
+    @GetMapping("/without/{desc}")
+    public ResponseEntity<List<PizzaEntity>> getByNotDescription(@PathVariable("desc") String description){
+        return ResponseEntity.ok(this.pizzaService.getWithout(description));
+    }
+
+    @GetMapping("/price/{menor}/{mayor}")
+    public ResponseEntity<List<PizzaEntity>> getPriceBetween(@PathVariable("menor") Double menor,
+                                                             @PathVariable("mayor") Double mayor){
+        return ResponseEntity.ok(this.pizzaService.getPriceBetween(menor, mayor));
     }
 }

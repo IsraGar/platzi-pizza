@@ -25,4 +25,19 @@ public class OrderController {
     public ResponseEntity<List<OrderEntity>> getAll(){
         return ResponseEntity.ok(this.orderService.getAll());
     }
+
+    @GetMapping("/after")
+    public ResponseEntity<List<OrderEntity>> getOrdersAfter(){
+        return ResponseEntity.ok(this.orderService.getOrdersAfter());
+    }
+
+    @GetMapping("/before")
+    public ResponseEntity<List<OrderEntity>> getOrdersBefore(){
+        return ResponseEntity.ok(this.orderService.getOrdersBefore());
+    }
+
+    @GetMapping("/out")
+    public ResponseEntity<List<OrderEntity>> getOutsideOrders(){
+        return ResponseEntity.ok(this.orderService.getOutsideOrders());
+    }
 }
