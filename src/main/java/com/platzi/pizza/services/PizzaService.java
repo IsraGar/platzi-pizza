@@ -34,4 +34,8 @@ public class PizzaService {
     public boolean existsPizza(int idPizza){
         return this.pizzaRepository.existsById(idPizza);
     }
+
+    public void deletePizza(int idPizza){
+        this.pizzaRepository.deleteById(idPizza);
+    }
 }
