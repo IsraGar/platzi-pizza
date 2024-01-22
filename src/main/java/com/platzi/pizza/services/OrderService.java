@@ -1,6 +1,7 @@
 package com.platzi.pizza.services;
 
 import com.platzi.pizza.persistence.entity.OrderEntity;
+import com.platzi.pizza.persistence.projection.OrderSummary;
 import com.platzi.pizza.persistence.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,8 @@ public class OrderService {
         return this.orderRepository.findCustomerOrders(customerId);
     }
 
+    public OrderSummary getSummary(int orderId){
+        return this.orderRepository.findSummary(orderId);
+    }
 
 }
