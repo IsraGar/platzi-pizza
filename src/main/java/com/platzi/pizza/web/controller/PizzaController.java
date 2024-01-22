@@ -2,6 +2,7 @@ package com.platzi.pizza.web.controller;
 
 import com.platzi.pizza.persistence.entity.PizzaEntity;
 import com.platzi.pizza.services.PizzaService;
+import com.platzi.pizza.services.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -82,5 +83,14 @@ public class PizzaController {
     public ResponseEntity<List<PizzaEntity>> getPriceBetween(@PathVariable("menor") Double menor,
                                                              @PathVariable("mayor") Double mayor){
         return ResponseEntity.ok(this.pizzaService.getPriceBetween(menor, mayor));
+    }
+
+    @PutMapping("/price")
+    public ResponseEntity updatePrice(@RequestBody UpdatePizzaPriceDto dto){
+        if(this.pizzaService.existsPizza(dto.getPizzaId())){
+            this.pizzaService.updatePrice(dto);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

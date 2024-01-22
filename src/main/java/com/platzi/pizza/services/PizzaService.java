@@ -3,6 +3,8 @@ package com.platzi.pizza.services;
 import com.platzi.pizza.persistence.entity.PizzaEntity;
 import com.platzi.pizza.persistence.repository.PizzaPagSortRepository;
 import com.platzi.pizza.persistence.repository.PizzaRepository;
+import com.platzi.pizza.services.dto.UpdatePizzaPriceDto;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -66,5 +68,10 @@ public class PizzaService {
 
     public List<PizzaEntity> getPriceBetween(Double menor, Double mayor){
         return this.pizzaRepository.findAllByAvailableTrueAndPriceBetween(menor, mayor);
+    }
+
+    @Transactional
+    public void updatePrice(UpdatePizzaPriceDto dto){
+        this.pizzaRepository.updatePrice(dto);
     }
 }
